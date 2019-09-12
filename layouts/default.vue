@@ -12,7 +12,8 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <v-btn class="title" nuxt to="login" text>{{ account | name }}様</v-btn>
+        <v-btn class="title" text fixeds>{{ account | name }}様</v-btn>
+        <v-btn @click.stop="logoutAlert" color="#FCEC64">ログアウト</v-btn>
       </v-toolbar-items>
     </v-app-bar>
     <v-content>
@@ -38,5 +39,17 @@ export default {
   computed: {
     ...mapGetters("login", ["account", "branch", "bank"]),
   },
+  methods:{
+    logoutAlert(){
+      console.log("logAlert");
+      var logoutAlert = confirm("ログアウトしますか？");
+      if(logoutAlert == true){
+        this.$router.push("/login");
+      }
+      else{
+
+      }
+    }
+  }
 };
 </script>
