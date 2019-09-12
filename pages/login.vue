@@ -20,10 +20,13 @@
           :rules="rules"
         />
         <v-text-field
+          id="password"
           v-model="password"
           label="パスワード"
           :rules="rules"
+          :type="!spy ? 'password':'text'"
         />
+        <v-checkbox v-model="spy" label="パスワードを表示する" />
       </v-form>
     </v-card-text>
     <v-card-actions>
@@ -40,6 +43,7 @@ import md5 from "blueimp-md5";
 export default {
   layout: "login",
   data: () => ({
+    spy: false,
     debug: false,
     valid: false,
     id: null,
