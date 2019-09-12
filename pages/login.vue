@@ -14,8 +14,16 @@
           :items="accounts"
           :rules="rules"
         />
-        <v-text-field v-model="user" label="ユーザーID"></v-text-field>
-        <v-text-field v-model="password" label="パスワード"></v-text-field>
+        <v-text-field
+          v-model="user"
+          label="ユーザーID"
+          :rules="rules"
+        />
+        <v-text-field
+          v-model="password"
+          label="パスワード"
+          :rules="rules"
+        />
       </v-form>
     </v-card-text>
     <v-card-actions>
@@ -55,8 +63,14 @@ export default {
   },
   methods: {
     login() {
-      this.$store.dispatch("login/id", this.id);
-      this.$router.push("/");
+      if(!(this.account) || md5(this.password) !== this.account.password){
+        alert("ユーザー名またはパスワードが違います。");
+      }
+      else{
+        this.$store.dispatch("login/id", this.id);
+        this.$router.push("/");
+      }
+      //console.log("computed.accounts:"+this.account.password);
     },
   },
 };
